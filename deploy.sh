@@ -11,6 +11,6 @@ docker push brunokarpo/multi-server:$SHA
 docker push brunokarpo/multi-worker:$SHA
 
 kubectl apply -f k8s
-kubectl rollout restart -f ./k8s/client-deployment.yml
-kubectl rollout restart -f ./k8s/server-config.yaml
-kubectl rollout restart -f ./k8s/worker-deployment.yml
+kubectl set image deployments/server-deployment server=brunokarpo/multi-server:$SHA
+kubectl set image deployments/client-deployment client=brunokarpo/multi-client:$SHA
+kubectl set image deployments/worker-deployment worker=brunokarpo/multi-worker:$SHA
